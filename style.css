@@ -1,12 +1,12 @@
 :root {
   color-scheme: light;
-  --bg-top: #f6efe7;
-  --bg-bottom: #dce8f2;
-  --card: rgba(255, 255, 255, 0.82);
+  --bg-top: #f8eee1;
+  --bg-bottom: #d7e7f3;
+  --card: rgba(255, 255, 255, 0.78);
   --text: #1f2933;
   --muted: #5b6875;
   --border: rgba(31, 41, 51, 0.08);
-  --shadow: 0 24px 60px rgba(31, 41, 51, 0.14);
+  --shadow: 0 28px 80px rgba(31, 41, 51, 0.16);
   --link-bg: rgba(255, 255, 255, 0.86);
   --link-hover: #1f2933;
 }
@@ -21,10 +21,11 @@ body {
   display: grid;
   place-items: center;
   padding: 24px;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.9), transparent 35%),
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.95), transparent 30%),
+    radial-gradient(circle at bottom left, rgba(255, 214, 153, 0.35), transparent 28%),
     linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
 }
 
@@ -37,6 +38,19 @@ body {
   box-shadow: var(--shadow);
   text-align: center;
   backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: auto -60px -80px auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 104, 104, 0.12), rgba(92, 179, 255, 0.08));
+  pointer-events: none;
 }
 
 .eyebrow {
@@ -48,31 +62,115 @@ body {
 }
 
 h1 {
-  margin: 0 0 28px;
+  margin: 0;
   font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.intro {
+  margin: 12px auto 28px;
+  max-width: 28rem;
+  color: var(--muted);
+  line-height: 1.5;
 }
 
 .links {
   display: grid;
   gap: 14px;
+  position: relative;
+  z-index: 1;
 }
 
-.links a {
-  display: block;
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   padding: 16px 18px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 20px;
   background: var(--link-bg);
   color: var(--text);
   text-decoration: none;
-  font-size: 1.05rem;
-  transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+  text-align: left;
+  box-shadow: 0 10px 25px rgba(31, 41, 51, 0.06);
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
 }
 
-.links a:hover,
-.links a:focus-visible {
+.link-card:hover,
+.link-card:focus-visible {
   transform: translateY(-2px);
   background: var(--link-hover);
   color: #fff;
+  box-shadow: 0 18px 36px rgba(31, 41, 51, 0.16);
+}
+
+.icon {
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(31, 41, 51, 0.08);
+}
+
+.icon svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.youtube .icon {
+  background: rgba(230, 33, 23, 0.12);
+  color: #d92317;
+}
+
+.youtube .play {
+  fill: #fff;
+}
+
+.twitch .icon {
+  background: rgba(145, 70, 255, 0.14);
+  color: #6d28d9;
+}
+
+.discord .icon {
+  background: rgba(88, 101, 242, 0.14);
+  color: #4255d4;
+}
+
+.link-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.label {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.meta {
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.link-card:hover .meta,
+.link-card:focus-visible .meta {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+@media (max-width: 520px) {
+  .card {
+    padding: 32px 20px;
+  }
+
+  .link-card {
+    padding: 14px 15px;
+  }
 }
