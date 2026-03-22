@@ -1,3 +1,1 @@
-document.getElementById("btn").addEventListener("click", () => {
-    alert("It works! 🎉");
-  });
+// No JavaScript is needed for this static link page.
